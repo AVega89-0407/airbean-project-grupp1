@@ -1,0 +1,44 @@
+Table users {
+  id INTEGER [pk, increment]
+  user_id TEXT [unique, not null]
+  name TEXT [not null]
+  email TEXT
+}
+
+Table products {
+  id INTEGER [pk, increment]
+  name TEXT [not null]
+  price REAL [not null]
+  description TEXT
+  category TEXT
+}
+
+Table orders {
+  id INTEGER [pk, increment]
+  user_id INTEGER [not null, ref: > users.id] // NULL = gäst
+  total_price REAL [not null]
+  status TEXT
+  created_at TEXT
+}
+
+Table orderproduct {
+  id INTEGER [pk, increment]
+  order_id INTEGER [not null, ref: > orders.id]
+  product_id INTEGER [not null, ref: > products.id]
+  quantity INTEGER [not null]
+  unit_price REAL [not null]
+}
+
+Table campaigns {
+  id INTEGER [pk, increment]
+  name TEXT [not null]
+  description TEXT
+  discount_type TEXT [not null]
+  discount_value REAL [not null]
+}
+
+Table campaign_products {
+  id INTEGER [pk, increment]
+  campaign_id INTEGER [not null, ref: > campaigns.id]
+  product_id INTEGER [not null, ref: > products.id]
+}
