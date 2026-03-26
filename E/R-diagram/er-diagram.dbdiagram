@@ -1,9 +1,46 @@
 {
   "version": "1.0.0",
-  "darkMode": false,
+  "darkMode": true,
   "gridEnabling": false,
   "detailLevel": "All",
-  "tablePositions": [],
+  "tablePositions": [
+    {
+      "name": "users",
+      "schemaName": "public",
+      "x": 12,
+      "y": 12
+    },
+    {
+      "name": "products",
+      "schemaName": "public",
+      "x": 12,
+      "y": 218
+    },
+    {
+      "name": "orders",
+      "schemaName": "public",
+      "x": 498.9033203125,
+      "y": 12
+    },
+    {
+      "name": "orderproduct",
+      "schemaName": "public",
+      "x": 989.17724609375,
+      "y": 12
+    },
+    {
+      "name": "campaigns",
+      "schemaName": "public",
+      "x": 12,
+      "y": 456
+    },
+    {
+      "name": "campaign_products",
+      "schemaName": "public",
+      "x": 597.6352506068744,
+      "y": 297.82132776846623
+    }
+  ],
   "tableGroupCollapseStates": [],
   "stickyNoteLayouts": [],
   "referencePaths": []
