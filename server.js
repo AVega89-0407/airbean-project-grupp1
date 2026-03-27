@@ -1,10 +1,11 @@
 import express from 'express'
 import menu from './menu/menu.js';
 import apiRoutes from './routes/api.js';
+import "dotenv/config";
 
 const app = express();
 app.use(express.json());
-app.use("./api", apiRoutes);
+app.use("/api", apiRoutes);
 
 
 app.get('/', (req,res) => {
