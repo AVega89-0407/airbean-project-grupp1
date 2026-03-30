@@ -6,7 +6,7 @@ const router = Router();
 
 router.get("/", (_req, res) => {
   try {
-    const users = db.prepare("SELECT * FROM users").all();
+    const users = db.prepare("SELECT id, name, email, createdAt FROM users").all();
     res.json(users);
   } catch (err) {
     console.error("GET /users:", err);
@@ -17,7 +17,7 @@ router.get("/", (_req, res) => {
 router.get('/:id', (req, res) => {
   const id = req.params.id;
 
-  const user = db.prepare('SELECT * FROM users WHERE id = ?').get(id);
+  const user = db.prepare('SELECT id, name, email, createdAt FROM users WHERE id = ?').get(id);
 
   if (!user) {
     return res.status(404).json({ fel: 'Användaren hittades inte' });
@@ -42,7 +42,7 @@ router.post("/", (req, res) => {
   `);
   stmt.run(id, name, email, createdAt);
 
-  const newUser = db.prepare('SELECT * FROM users WHERE id = ?').get(id);
+  const newUser = db.prepare('SELECT id, name, email, createdAt FROM users WHERE id = ?').get(id);
   res.status(201).json(newUser);
 });
 
@@ -64,7 +64,7 @@ router.put('/:id', (req, res) => {
     return res.status(404).json({ fel: 'Användaren hittades inte' });
   }
 
-  const updatedUser = db.prepare('SELECT * FROM users WHERE id = ?').get(id);
+  const updatedUser = db.prepare('SELECT id, name, email, createdAt FROM users WHERE id = ?').get(id);
   res.json(updatedUser);
 });
 
