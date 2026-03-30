@@ -1,5 +1,4 @@
 import express from 'express'
-import menu from './menu/menu.js';
 import apiRoutes from './routes/api.js';
 import "dotenv/config";
 
@@ -10,21 +9,6 @@ app.use("/api", apiRoutes);
 
 app.get('/', (req,res) => {
     res.json({ message: 'Welcome to Airbean!'});
-});
-
-app.get('/menu', (req, res) => {
-    res.json(menu);
-});
-
-app.get('/menu/:id', (req, res) => {
-    const coffeeId = Number(req.params.id);
-
-    const coffee = menu.find(m => m.id === coffeeId);
-
-    if (!coffee) {
-        return res.status(404).json({ error: 'Coffee not found' });
-    }
-    res.json(coffee);
 });
 
 const PORT = process.env.PORT || 3000;
