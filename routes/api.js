@@ -3,7 +3,7 @@ import { requireApiKey } from "../middleware/requireApiKey.js";
 import userRoutes from "./userRoutes.js";
 import menuRoutes from "./menuRoutes.js";
 
-import orderRoutes from "./ordersRoutes.js";
+import orderRoutes from "./orderRoutes.js";
 
 const router = Router();
 

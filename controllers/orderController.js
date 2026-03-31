@@ -4,7 +4,7 @@ export function createOrder(req, res) {
     const {items, total, userId} = req.body;
 
 const orderId = crypto.randomUUID();
-const eta = Math.floor(Math.random() *10) + 5 + orderId.items.length * 2;
+const eta = Math.floor(Math.random() *10) + 5 + items.length * 2;
 
 res.status(201).json({
     orderId,
