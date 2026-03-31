@@ -3,9 +3,12 @@ import dbOrders from "../data/dbOrders.js";
 import { v4 as uuidv4 } from "uuid";
 import menu from "../menu/menu.js";
 
+import { createOrderValidator } from "../middleware/orderValidator.js";
+import { handleValidationErrors } from "../middleware/errorHandler.js";
+
 const router = Router();
 
-router.post('/api/orders', (req, res) => {
+router.post('/api/orders', createOrderValidator, handleValidationErrors, (req, res) => {
     const { user_id, items } = req.body;
 
     if (!user_id) {
