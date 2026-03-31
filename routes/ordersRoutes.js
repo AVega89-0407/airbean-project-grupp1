@@ -8,6 +8,30 @@ import { handleValidationErrors } from "../middleware/errorHandler.js";
 
 const router = Router();
 
+// GET /api/orders/status/:orderId
+// Hämtar status för en specifik order baserat på order-ID
+// OBS: Denna route måste ligga FÖRE eventuella routes med /:param-wildcards
+// annars tolkar Express "status" som ett parameter-värde istället för en fast path
+router.get('/api/orders/status/:orderId', (req, res) => {
+    const { orderId } = req.params;
+
+    // Slå upp ordern i databasen med det angivna order-ID:t
+    const order = dbOrders.prepare('SELECT * FROM orders WHERE id = ?').get(orderId);
+
+    // Om ingen order hittas — returnera 404
+    if (!order) {
+        return res.status(404).json({ error: 'Order hittades inte' });
+    }
+
+    // Returnera orderns status och relevant information
+    res.json({
+        orderId: order.id,
+        status: order.status,
+        createdAt: order.createdAt,
+        total_price: order.total_price,
+    });
+});
+
 router.post('/api/orders', createOrderValidator, handleValidationErrors, (req, res) => {
     const { user_id, items } = req.body;
 
