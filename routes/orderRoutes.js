@@ -18,13 +18,24 @@ try {
 }
 });
 
-router.get('/:id', (req, res) => {
-    const order = db.prepare('SELECT * FROM orders WHERE orderId = ?').get(req.params.id);
-    
+router.get('/api/orders/status/:orderId', (req, res) => {
+    const { orderId } = req.params;
+
+    // Slå upp ordern i databasen med det angivna order-ID:t
+    const order = dbOrders.prepare('SELECT * FROM orders WHERE id = ?').get(orderId);
+
+    // Om ingen order hittas — returnera 404
     if (!order) {
-        return res.status(404).json({ error: 'Order not found' });
+        return res.status(404).json({ error: 'Order hittades inte' });
     }
-    res.json(order);
+
+    // Returnera orderns status och relevant information
+    res.json({
+        orderId: order.id,
+        eta: order.eta,
+        createdAt: order.createdAt,
+        total: order.total,
+    });
 });
 
 router.post('/', OrderValidator, createOrder, (req, res) => {
