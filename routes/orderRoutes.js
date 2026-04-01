@@ -1,5 +1,4 @@
 import { Router } from "express";
-import menu from "../menu/menu.js";
 import db from "../data/db.js";
 import { v4 as uuidv4 } from "uuid";
 
@@ -18,11 +17,14 @@ try {
 }
 });
 
-router.get('/api/orders/status/:orderId', (req, res) => {
+router.get('/status/:orderId', (req, res) => {
     const { orderId } = req.params;
 
-    // Slå upp ordern i databasen med det angivna order-ID:t
-    const order = dbOrders.prepare('SELECT * FROM orders WHERE id = ?').get(orderId);
+        const order = db.prepare(`
+            SELECT orderId, eta, total, userId, createdAt
+            FROM orders
+            WHERE orderId = ?
+        `).get(orderId);
 
     // Om ingen order hittas — returnera 404
     if (!order) {
@@ -31,7 +33,7 @@ router.get('/api/orders/status/:orderId', (req, res) => {
 
     // Returnera orderns status och relevant information
     res.json({
-        orderId: order.id,
+        orderId: order.orderId,
         eta: order.eta,
         createdAt: order.createdAt,
         total: order.total,
