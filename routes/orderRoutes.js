@@ -1,6 +1,5 @@
 import { Router } from "express";
 import db from "../data/db.js";
-import { v4 as uuidv4 } from "uuid";
 
 import { createOrder } from "../controllers/orderController.js";
 import { OrderValidator } from "../middleware/orderValidator.js";
@@ -40,19 +39,24 @@ router.get('/status/:orderId', (req, res) => {
     });
 });
 
-router.post('/', OrderValidator, createOrder, (req, res) => {
+// orderhistroik för en användare
+router.get('/user/:userId', (req, res) => {
+    const { userId } = req.params;
 
-    const createdAt = new Date().toISOString();
-    const orderId = uuidv4();
+    try {
+        const orders = db.prepare(`
+            SELECT orderId, eta, total, userId, createdAt
+            FROM orders
+            WHERE userId = ?
+        `).all(userId);
 
-const stmt = db.prepare(`
-    INSERT INTO orders (orderId, eta, total, userId, createdAt)
-    VALUES (?, ?, ?, ?, ?)
-`);
-    stmt.run(orderId, eta, total, userId, createdAt);
-
-const newOrder = db.prepare('SELECT orderId, eta, total, userId, createdAt FROM orders WHERE orderId = ?').get(orderId);
-    res.status(201).json(newOrder);
+        res.json(orders);
+    } catch (err) {
+        console.error("GET /orders/user/:userId:", err);
+        res.status(500).json({ fel: "Kunde inte hämta order" });
+    }
 });
+
+router.post('/', OrderValidator, createOrder);
 
 export default router;

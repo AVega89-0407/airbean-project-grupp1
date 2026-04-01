@@ -4,7 +4,7 @@ const db = new Database("./data/airbean.db",);
 
 db.exec(`
 CREATE TABLE IF NOT EXISTS users (
-    id TEXT PRIMARY KEY,
+    userId TEXT PRIMARY KEY,
     name TEXT NOT NULL,
     email TEXT NOT NULL UNIQUE,
     createdAt TEXT
