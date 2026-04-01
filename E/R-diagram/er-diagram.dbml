@@ -15,10 +15,10 @@ Table products {
 
 Table orders {
   id INTEGER [pk, increment]
-  user_id INTEGER [not null, ref: > users.id] // NULL = gäst
-  total_price REAL [not null]
-  status TEXT
-  created_at TEXT
+  userId INTEGER [not null, ref: > users.id] // NULL = gäst
+  total REAL [not null]
+  eta TEXT
+  createdAt TEXT
 }
 
 Table orderproduct {
