@@ -9,6 +9,14 @@ CREATE TABLE IF NOT EXISTS users (
     email TEXT NOT NULL UNIQUE,
     createdAt TEXT
 );
+
+CREATE TABLE IF NOT EXISTS orders (
+    orderId TEXT PRIMARY KEY,
+    eta     INTEGER NOT NULL,
+    total   REAL NOT NULL,
+    userId  TEXT,
+    createdAt TEXT DEFAULT CURRENT_TIMESTAMP
+);
 `);
 
 export default db;
