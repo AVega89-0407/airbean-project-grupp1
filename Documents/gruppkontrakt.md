@@ -1,7 +1,7 @@
 # Gruppkontrakt – [Grupp 1 / KYH-FE25]
 
 > Senast uppdaterat: [2026-03-24]  
-> Alla i gruppen har läst och godkänt: [Namn 1], [Namn 2], …
+> Alla i gruppen har läst och godkänt: Andrea Vega Piñones, Angelica Jonsson Landström, …
 
 ---
 

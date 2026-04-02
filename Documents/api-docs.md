@@ -22,46 +22,160 @@ Hämtar hela menyn.
 
 ---
 
-## GET /api/[resurs]/:id
+## GET /api/users/:userId
 
-[Vad endpointen gör]
+Hämtar usern med sitt unika ID.
 
 **Svar:** `200 OK`
+
+```json
+{
+    "id": "980e94fd-2a4b-4859-8a45-dea74c330130",
+    "name": "Lisa",
+    "email": "lisa@example.se",
+    "createdAt": "2026-04-02T08:19:23.712Z"
+}
+```
+
 **Fel:** `404 Not Found`
+
+```json 
+{
+    "fel": "Användaren hittades inte"
+}
+```
 
 ---
 
-## POST /api/[resurs]
+## POST /api/users
 
-[Vad endpointen gör]
+Skapar en user med ett unikt ID.
 
 **Body:**
 
 ```json
 {
-  "fält1": "värde",
-  "fält2": "värde"
+    "name": "Lisa",
+    "email": "lisa@example.se"
 }
 ```
 
 **Svar:** `201 Created`
+
+```json
+{
+    "id": "980e94fd-2a4b-4859-8a45-dea74c330130",
+    "name": "Lisa",
+    "email": "lisa@example.se",
+    "createdAt": "2026-04-02T08:19:23.712Z"
+}
+```
+
 **Fel:** `400 Bad Request`
+
+```json
+{
+    "fel": "Name och email krävs"
+}
+```
 
 ---
 
-## PUT /api/[resurs]/:id
+## PUT /api/users/:userId
 
-[Vad endpointen gör]
+Här kan du ändra users namn eller email och sedan uppdatera.
 
-**Body:** [samma som POST]
+**Body:**
+
+```json
+{
+    "name": "Lisa",
+    "email": "lisaj@example.se"
+}
+```
+
 **Svar:** `200 OK`
 **Fel:** `404 Not Found` | `400 Bad Request`
 
 ---
 
-## DELETE /api/[resurs]/:id
+## DELETE /api/users/:userId
 
-[Vad endpointen gör]
+Den tar bort en user.
 
 **Svar:** `204 No Content`
+```json
+1
+
+```
+
 **Fel:** `404 Not Found`
+
+```json
+{
+    "fel": "Användaren hittades inte"
+}
+```
+---
+
+## GET /api/orders/
+
+Den hämtar alla orders som ligger i databasen. 
+
+**Svar:** `200 OK`
+
+```json
+    {
+        "orderId": "074e2150-bc65-4a3c-b81a-3ef85ad579df",
+        "eta": 16,
+        "total": 137,
+        "userId": "user-123",
+        "createdAt": "2026-04-01T08:50:37.117Z"
+    }
+```
+
+**Fel:** `404 Not Found`
+
+---
+
+## POST /api/orders/
+
+Skapar en order som kopplas ihop med userId. 
+
+**Body:**
+
+```json
+{
+    "items": [4],
+    "userId": "980e94fd-2a4b-4859-8a45-dea74c330130"
+}
+```
+**Svar:** `201 Created`
+
+```json
+{
+    "orderId": "3f1c8035-c93e-4a29-9f33-d871b1212074",
+    "eta": 12,
+    "items": [
+        4
+    ],
+    "total": 49,
+    "userId": "980e94fd-2a4b-4859-8a45-dea74c330130",
+    "newOrder": {
+        "orderId": "3f1c8035-c93e-4a29-9f33-d871b1212074",
+        "eta": 12,
+        "total": 49,
+        "userId": "980e94fd-2a4b-4859-8a45-dea74c330130",
+        "createdAt": "2026-04-02T08:42:02.178Z"
+    },
+    "message": "Order mottagen! Din beställning kommer att vara klar om ca 12 minuter."
+}
+```
+
+**Fel:** `400 Bad Request`
+
+```json
+{
+    "fel": "items must be a non-empty array"
+}
+```

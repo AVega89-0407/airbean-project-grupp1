@@ -1,6 +1,6 @@
 # Airbean Project
 
-[En kort beskrivning av vad API:et gör – 1-2 meningar.]
+API:et hämtar en meny med kaffe och pris. Sedan kan en användare skapa en user eller gå in som guest och skapa en order som sparas i databasen.
 
 ## Teknikstack
 
@@ -28,12 +28,11 @@ node server.js
 node --watch server.js
 ```
 
-Servern startar på `http://localhost:3000` (eller den port du angett i `.env`).
+Servern startar på `http://localhost:3000`.
 
 ## API-dokumentation
 
-[Här lägger ni er API-dokumentation – varje endpoint med metod, URL, body, svar och felfall.
-Se guiden "API-dokumentation" för format och exempel.]
+- [API Documentation](./Documents/api-docs.md)
 
 ## WebSocket-diskussion
 
@@ -42,6 +41,6 @@ T.ex. realtidsuppdateringar av orderstatus, live-notiser till baristan, etc.]
 
 ## Gruppmedlemmar
 
-- [Namn 1]
-- [Namn 2]
+- Andrea Vega Piñones
+- Angelica Jonsson Landström
 - [Namn 3]
