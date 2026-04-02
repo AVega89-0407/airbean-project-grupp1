@@ -48,17 +48,34 @@ router.post("/", (req, res) => {
 
 router.put('/:userId', (req, res) => {
   const id = req.params.userId;
+  const { name, email } = req.body;
 
-  if (!req.body.name || !req.body.email) {
-    return res.status(400).json({ fel: 'Name och email krävs' });
+  if (!name && !email) {
+    return res.status(400).json({ fel: 'minst ett fält Name och email krävs' });
   }
+
+  const fields = [];
+  const values = [];
+
+  if (name) {
+    fields.push('name = ?');
+    values.push(name);
+  }
+
+  if (email) {
+    fields.push('email = ?');
+    values.push(email);
+  }
+
+  values.push(id);
 
   const stmt = db.prepare(`
     UPDATE users
-    SET name = ?, email = ?
+    SET ${fields.join(', ')}
     WHERE userId = ?
   `);
-  const result = stmt.run(req.body.name, req.body.email, id);
+
+  const result = stmt.run(...values);
 
   if (result.changes === 0) {
     return res.status(404).json({ fel: 'Användaren hittades inte' });
@@ -88,10 +105,6 @@ const result =db.prepare('DELETE FROM users WHERE userId = ?').run(userId);
 if (result.changes === 0) {
   return res.status(500).json({ fel: "Kunde inte radera användaren" });
 }
-
-res.status(204).send({
-    message: "Användaren och relaterade orderdata har raderats"
-});
 
 res.status(200).json({
     message: "Användaren och relaterade orderhistoriken anonymiserades"
