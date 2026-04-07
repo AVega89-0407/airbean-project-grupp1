@@ -16,7 +16,7 @@ try {
 }
 });
 
-router.get('/status/:orderId', (req, res) => {
+router.get('/status/:orderId',(req, res) => {
     const { orderId } = req.params;
 
         const order = db.prepare(`
@@ -30,14 +30,17 @@ router.get('/status/:orderId', (req, res) => {
         return res.status(404).json({ error: 'Order hittades inte' });
     }
 
+    const createdTime = new Date(order.createdAt);
+    const now = new Date();
+    const minutesPassed = Math.floor((now - createdTime) / 60000);
+
+    const minutesLeft = Math.max(order.eta - minutesPassed, 0);
+
     // Returnera orderns status och relevant information
     res.json({
-        orderId: order.orderId,
-        eta: order.eta,
-        createdAt: order.createdAt,
-        total: order.total,
+        message: `Din beställning är ${minutesLeft > 0 ? `på väg! Beräknad tid kvar: ${minutesLeft} minuter` : 'framme!' }`
     });
-});
+    });
 
 // orderhistroik för en användare
 router.get('/user/:userId', (req, res) => {

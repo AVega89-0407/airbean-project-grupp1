@@ -19,11 +19,6 @@ try{
     const newOrder = db.prepare('SELECT orderId, eta, total, userId, createdAt FROM orders WHERE orderId = ?').get(orderId);
 
 res.status(201).json({
-    orderId,
-    eta,
-    items,
-    total,
-    userId: userId || null,
     newOrder,
     message: `Order mottagen! Din beställning kommer att vara klar om ca ${eta} minuter.`
 });
