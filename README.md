@@ -12,8 +12,8 @@ API:et hämtar en meny med kaffe och pris. Sedan kan en användare skapa en user
 
 ```bash
 # Klona repot
-git clone [repo-url]
-cd [projektmapp]
+git clone https://github.com/AVega89-0407/airbean-project-grupp1.git
+cd airbean-project-grupp1
 
 # Installera beroenden
 npm install
@@ -36,8 +36,7 @@ Servern startar på `http://localhost:3000`.
 
 ## WebSocket-diskussion
 
-[Skriv en kort reflektion: Hur skulle WebSockets kunna användas i det här projektet?
-T.ex. realtidsuppdateringar av orderstatus, live-notiser till baristan, etc.]
+Skulle vi ha använt webSockets hade vi gjort realtidsuppdateringar av orderstatus så att usern kan se när deras beställning är klar i realtid.
 
 ## Gruppmedlemmar
 

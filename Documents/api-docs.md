@@ -1,11 +1,11 @@
 # Airbean API – Dokumentation
 
-REST API som hanterar kaffe menyn.
+REST API som hanterar kaffe menyn, orders och users.
 Bas-URL: `http://localhost:3000`
 
----
 
-## GET /menu
+# ☕ Menu
+### GET /menu
 
 Hämtar hela menyn.
 
@@ -20,9 +20,9 @@ Hämtar hela menyn.
     }
 ```
 
----
 
-## GET /api/users/:userId
+# 👤 Users
+### GET /api/users/:userId
 
 Hämtar usern med sitt unika ID.
 
@@ -47,7 +47,7 @@ Hämtar usern med sitt unika ID.
 
 ---
 
-## POST /api/users
+### POST /api/users
 
 Skapar en user med ett unikt ID.
 
@@ -81,7 +81,7 @@ Skapar en user med ett unikt ID.
 
 ---
 
-## PUT /api/users/:userId
+### PUT /api/users/:userId
 
 Här kan du ändra users namn eller email och sedan uppdatera.
 
@@ -95,17 +95,35 @@ Här kan du ändra users namn eller email och sedan uppdatera.
 ```
 
 **Svar:** `200 OK`
-**Fel:** `404 Not Found` | `400 Bad Request`
+
+```json
+{
+    "userId": "58f632c2-18a7-46d4-baff-591a5c9de95f",
+    "name": "Lisa",
+    "email": "lisaj@example.se",
+    "createdAt": "2026-04-02T12:51:34.568Z"
+}
+```
+
+**Fel:** `404 Not Found`
+
+```json
+{
+    "fel": "Användaren hittades inte"
+}
+```
 
 ---
 
-## DELETE /api/users/:userId
+### DELETE /api/users/:userId
 
 Den tar bort en user.
 
 **Svar:** `204 No Content`
 ```json
-1
+{
+    "message": "Användaren och relaterade orderhistoriken anonymiserades"
+}
 
 ```
 
@@ -116,9 +134,9 @@ Den tar bort en user.
     "fel": "Användaren hittades inte"
 }
 ```
----
 
-## GET /api/orders/
+# 🧾 Orders
+### GET /api/orders/
 
 Den hämtar alla orders som ligger i databasen. 
 
@@ -134,11 +152,11 @@ Den hämtar alla orders som ligger i databasen.
     }
 ```
 
-**Fel:** `404 Not Found`
+**Fel:** `404 Not Found` | `500 Internal Server Error`
 
 ---
 
-## POST /api/orders/
+### POST /api/orders/
 
 Skapar en order som kopplas ihop med userId. 
 
@@ -153,22 +171,15 @@ Skapar en order som kopplas ihop med userId.
 **Svar:** `201 Created`
 
 ```json
-{
-    "orderId": "3f1c8035-c93e-4a29-9f33-d871b1212074",
-    "eta": 12,
-    "items": [
-        4
-    ],
-    "total": 49,
-    "userId": "980e94fd-2a4b-4859-8a45-dea74c330130",
+}
     "newOrder": {
-        "orderId": "3f1c8035-c93e-4a29-9f33-d871b1212074",
-        "eta": 12,
-        "total": 49,
-        "userId": "980e94fd-2a4b-4859-8a45-dea74c330130",
-        "createdAt": "2026-04-02T08:42:02.178Z"
+        "orderId": "b1c57f22-bfec-4c64-910a-f6c2cf5dc17a",
+        "eta": 10,
+        "total": 88,
+        "userId": "e0c77c6b-ee9d-491c-b35d-d71c9d7a9849",
+        "createdAt": "2026-04-07T08:38:13.244Z"
     },
-    "message": "Order mottagen! Din beställning kommer att vara klar om ca 12 minuter."
+    "message": "Order mottagen! Din beställning kommer att vara klar om ca 10 minuter."
 }
 ```
 
@@ -179,3 +190,40 @@ Skapar en order som kopplas ihop med userId.
     "fel": "items must be a non-empty array"
 }
 ```
+---
+
+### GET api/orders/status/orderId
+
+Här kan man se orderstatusen för det man har beställt genom att använda orderId som man fick vid beställningen.
+
+**Svar:** `200 OK`
+
+
+```json
+{
+    "orderId": "074e2150-bc65-4a3c-b81a-3ef85ad579df",
+    "eta": 16,
+    "createdAt": "2026-04-01T08:50:37.117Z",
+    "total": 137
+}
+```
+---
+### GET api/orders/user/userId
+
+Här kan du se orderhistoriken för vad user med sitt unika id har gjort.
+
+**Svar:** `200 OK`
+
+```json
+[
+    {
+        "orderId": "2cc10b59-9b26-4183-b316-fa6d1da0b3fe",
+        "eta": 8,
+        "total": 54,
+        "userId": "cf99c8c1-9a36-41b9-acd6-d927b66433e9",
+        "createdAt": "2026-04-07T08:05:53.865Z"
+    }
+]
+```
+
+**Fel:** `404 Not Found`
