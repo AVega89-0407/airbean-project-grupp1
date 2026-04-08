@@ -1,7 +1,9 @@
 import Database from "better-sqlite3";
 
+// Skapar/öppnar SQLite-databasen
 const db = new Database("./data/airbean.db",);
 
+// Skapar tabellerna om de inte redan finns
 db.exec(`
 CREATE TABLE IF NOT EXISTS users (
     userId TEXT PRIMARY KEY,
