@@ -92,4 +92,3 @@ Vi har läst detta kontrakt och committerar oss till att följa det tills vi gem
 |  Andrea    | 24/3-26      |     A.V          |
 |  Angelica    |  24/3-26     |   A.JL          |
 |  Amir |   24/3-26    |     A.H          |
-|      |       |               |
