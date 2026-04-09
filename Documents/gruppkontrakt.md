@@ -1,8 +1,7 @@
 # Gruppkontrakt – [Grupp 1 / KYH-FE25]
 
 > Senast uppdaterat: [2026-03-24]  
-> Alla i gruppen har läst och godkänt: Andrea Vega Piñones, Angelica Jonsson Landström, …
-
+> Alla i gruppen har läst och godkänt: Andrea Vega Piñones, Angelica Jonsson Landström, Amir Hem.
 ---
 
 ## 🎯 Mål & Förarbete
@@ -91,6 +90,6 @@ Vi har läst detta kontrakt och committerar oss till att följa det tills vi gem
 | Namn | Datum | Signatur / OK |
 |------|-------|---------------|
 |  Andrea    | 24/3-26      |     A.V          |
-|  Angelica    |  24/6-26     |   A.JL          |
-|      |       |               |
+|  Angelica    |  24/3-26     |   A.JL          |
+|  Amir |   24/3-26    |     A.H          |
 |      |       |               |

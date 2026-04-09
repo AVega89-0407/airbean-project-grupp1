@@ -42,4 +42,4 @@ Skulle vi ha använt webSockets hade vi gjort realtidsuppdateringar av orderstat
 
 - Andrea Vega Piñones
 - Angelica Jonsson Landström
-- [Namn 3]
+- Amir Hem
